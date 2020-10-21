@@ -13,7 +13,9 @@
     },
     "categories": {
       "auth": {
-        "siteiotb6397cdf": {}
+        "siteiotb6397cdf": {
+          "hostedUIProviderCreds": "[]"
+        }
       },
       "hosting": {
         "amplifyhosting": {

@@ -1,5 +1,6 @@
 type Todo @model {
   id: ID!
+  sub: String!
   name: String!
   temperature: Float
   date: AWSDateTime

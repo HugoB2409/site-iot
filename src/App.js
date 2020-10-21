@@ -1,28 +1,26 @@
 /* src/App.js */
-import React, { useEffect, useState } from "react";
-import Accueil from "./accueil";
+import React from "react";
+import Accueil from "./component/accueil";
+import UserInfo from "./component/userInfo";
+import AddTemp from "./component/addTemp";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import UserInfo from "./userInfo";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+//TODO: UX
+//TODO: Ajouter la page parametres
+//TODO: Ajouter la page d'ajout de user
+//TODO: Cognito: Creer un user group Admin
 
 const App = () => {
   return (
-        <Router>
-          <Switch>
-          <Route path="/" exact component={Accueil}/>
-            <Route path="/user/:id" exact component={UserInfo}/>
-          </Switch>
-        </Router>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Accueil} />
+        <Route path="/newTemp" exact component={AddTemp} />
+        <Route path="/user/:sub" exact component={UserInfo} />
+      </Switch>
+    </Router>
   );
 };
-
 
 export default withAuthenticator(App);

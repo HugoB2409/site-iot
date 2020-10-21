@@ -5,6 +5,7 @@ export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
       id
+      sub
       name
       temperature
       date
@@ -13,7 +14,6 @@ export const getTodo = /* GraphQL */ `
     }
   }
 `;
-
 export const listTodos = /* GraphQL */ `
   query ListTodos(
     $filter: ModelTodoFilterInput
@@ -23,6 +23,7 @@ export const listTodos = /* GraphQL */ `
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        sub
         name
         temperature
         date

@@ -9,19 +9,17 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useHistory } from "react-router-dom";
 
-//TODO: Ajouter la pagination
-//TODO: Ajouter des filtre
-
 const useStyles = makeStyles({
   table: {
     minWidth: 260,
   },
 });
 
-const ListTemp = (props) => {
+const ListUser = (props) => {
   let history = useHistory();
   const classes = useStyles();
   const rows = props.data;
+  console.log(rows[0]);
 
   const handleClick = (sub) => {
     history.push(`/user/${sub}`);
@@ -36,21 +34,25 @@ const ListTemp = (props) => {
               <b>Nom</b>
             </TableCell>
             <TableCell align="right">
-              <b>Temperature(°C)</b>
+              <b>Date de creation</b>
             </TableCell>
             <TableCell align="right">
-              <b>Date prise</b>
+              <b>Status</b>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id} hover onClick={() => handleClick(row.sub)}>
+            <TableRow
+              key={row.Username}
+              hover
+              onClick={() => handleClick(row.Attributes[0].Value)}
+            >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.Username}
               </TableCell>
-              <TableCell align="right">{row.temperature}</TableCell>
-              <TableCell align="right">{row.createdAt}</TableCell>
+              <TableCell align="right">{row.UserCreateDate}</TableCell>
+              <TableCell align="right">{row.UserStatus}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -59,4 +61,4 @@ const ListTemp = (props) => {
   );
 };
 
-export default ListTemp;
+export default ListUser;

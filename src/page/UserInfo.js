@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { API } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
-import NavigationBar from "./NavigationBar";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,6 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
 //TODO: UI
 //TODO: Ajouter graphique pour voir l'historique du user
@@ -18,14 +18,17 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  title: {
+    marginTop: 30,
+  },
 });
 
 const UserInfo = (props) => {
-  const [todos, setTodos] = useState([]);
+  const [temps, setTemps] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    fetchTodos();
+    fetchTemps();
   }, []);
 
   let filter = {
@@ -34,23 +37,24 @@ const UserInfo = (props) => {
     },
   };
 
-  const fetchTodos = async () => {
+  const fetchTemps = async () => {
     try {
-      const todoData = await API.graphql({
+      const tempData = await API.graphql({
         query: listTodos,
         variables: { filter: filter },
       });
-      const todos = todoData.data.listTodos.items;
-      setTodos(todos);
-      console.log(todos);
+      const temperatures = tempData.data.listTodos.items;
+      setTemps(temperatures);
     } catch (err) {
-      console.log("error fetching todos");
+      console.log("error fetching temperature");
     }
   };
 
   return (
     <div>
-      <NavigationBar />
+      <Typography variant="h4" className={classes.title}>
+        Information supplementaires
+      </Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -61,7 +65,7 @@ const UserInfo = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {todos.map((row) => (
+            {temps.map((row) => (
               <TableRow key={row.name} hover>
                 <TableCell component="th" scope="row">
                   {row.name}

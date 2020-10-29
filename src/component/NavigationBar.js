@@ -3,12 +3,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import PeopleIcon from "@material-ui/icons/People";
+import WarningIcon from "@material-ui/icons/Warning";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Auth } from "aws-amplify";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,17 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-async function signOut() {
-  try {
-    await Auth.signOut().then(() => {
-      window.location.reload();
-    });
-  } catch (error) {
-    console.log("error signing out: ", error);
-  }
-}
-
 const NavigationBar = () => {
+  let history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -53,13 +47,35 @@ const NavigationBar = () => {
     setAnchorEl(null);
   };
 
+  const handleClickParam = () => {
+    history.push(`/parameter`);
+  };
+
+  const handleClickUser = () => {
+    history.push(`/User`);
+  };
+
+  const handleClickWarning = () => {
+    history.push(`/warning`);
+  };
+
+  const signOut = async () => {
+    try {
+      await Auth.signOut().then(() => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  };
+
   return (
     <React.Fragment>
       <AppBar position="fixed">
         <Toolbar>
           <Link to="/" className={classes.link}>
             <Typography variant="h4" className={classes.title}>
-              Site-IOT
+              TempReader
             </Typography>
           </Link>
           <div>
@@ -67,10 +83,28 @@ const NavigationBar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
+              onClick={handleClickUser}
+              color="inherit"
+            >
+              <PeopleIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleClickWarning}
+              color="inherit"
+            >
+              <WarningIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle fontSize="large" />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -87,7 +121,7 @@ const NavigationBar = () => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Parametres</MenuItem>
+              <MenuItem onClick={handleClickParam}>Parametres</MenuItem>
               <MenuItem onClick={signOut}>Deconnexion</MenuItem>
             </Menu>
           </div>

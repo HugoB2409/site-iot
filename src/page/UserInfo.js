@@ -10,8 +10,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Chart from "../component/chart";
 
 //TODO: UI
+//TODO: Ajouter info sur user
 //TODO: Ajouter graphique pour voir l'historique du user
 
 const useStyles = makeStyles({
@@ -26,16 +28,11 @@ const useStyles = makeStyles({
 const UserInfo = (props) => {
   const [temps, setTemps] = useState([]);
   const classes = useStyles();
+  var test = [];
 
   useEffect(() => {
     fetchTemps();
   }, []);
-
-  let filter = {
-    sub: {
-      eq: props.match.params.sub,
-    },
-  };
 
   const fetchTemps = async () => {
     try {
@@ -48,6 +45,12 @@ const UserInfo = (props) => {
     } catch (err) {
       console.log("error fetching temperature");
     }
+  };
+
+  let filter = {
+    sub: {
+      eq: props.match.params.sub,
+    },
   };
 
   return (
@@ -66,17 +69,18 @@ const UserInfo = (props) => {
           </TableHead>
           <TableBody>
             {temps.map((row) => (
-              <TableRow key={row.name} hover>
+              <TableRow key={row.id} hover>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
                 <TableCell align="right">{row.temperature}</TableCell>
-                <TableCell align="right">{row.date}</TableCell>
+                <TableCell align="right">{row.createdAt}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <Chart data={temps} />
     </div>
   );
 };

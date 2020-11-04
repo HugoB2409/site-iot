@@ -15,6 +15,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 //TODO: UX
+//TODO: Ajouter pagination aux tableaux
+//TODO: Ajouter liste deroulante lors de l'ajout manuelle de temperature
+//TODO: Afficher le sub a mettre sur la puce apres avoir creer un user
+//TODO: Afficher les vrai info personnel dans la page UserInfo
+//TODO: Empecher un user a acceder au site
 
 const useStyles = makeStyles((theme) => ({
   container: {

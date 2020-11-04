@@ -40,6 +40,7 @@ const User = () => {
       },
     };
     const data = await API.get(apiName, path, myInit);
+    console.log(data);
     setUsers(data.Users);
   };
 

@@ -9,13 +9,31 @@ const chart = (props) => {
     }),
     datasets: [
       {
-        label: "Historique de la temperature",
+        label: "Temperature(°C)",
         data: props.data.map((row) => {
           return row.temperature;
         }),
         fill: false,
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgba(255, 99, 132, 0.2)",
+        backgroundColor: "rgb(0, 0, 255)",
+        borderColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        label: "Temperature ambiant(°C)",
+        data: props.data.map((row) => {
+          return row.temperature - 1;
+        }),
+        fill: false,
+        backgroundColor: "rgb(0, 255, 0)",
+        borderColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        label: "Limite(°C)",
+        data: props.data.map((row) => {
+          return 38;
+        }),
+        fill: false,
+        backgroundColor: "rgb(255, 0, 0)",
+        borderColor: "rgba(255, 0, 0, 1)",
       },
     ],
   };
@@ -33,12 +51,7 @@ const chart = (props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "400px",
-        height: "300px",
-      }}
-    >
+    <div>
       <Line data={data} options={options} />
     </div>
   );

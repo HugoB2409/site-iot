@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
 import { useHistory } from "react-router-dom";
 
@@ -46,15 +46,14 @@ const Warning = () => {
         query: listTodos,
         variables: { filter: filter },
       });
-      const temperatures = data.data.listTodos.items;
-      setTemps(temperatures);
+      setTemps(data.data.listTodos.items);
     } catch (err) {
       console.log("error fetching todos");
     }
   };
 
-  const handleClick = (sub) => {
-    history.push(`/user/${sub}`);
+  const handleClick = (name) => {
+    history.push(`/user/${name}`);
   };
 
   return (
@@ -79,7 +78,11 @@ const Warning = () => {
           </TableHead>
           <TableBody>
             {temps.map((row) => (
-              <TableRow key={row.id} hover onClick={() => handleClick(row.sub)}>
+              <TableRow
+                key={row.id}
+                hover
+                onClick={() => handleClick(row.name)}
+              >
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>

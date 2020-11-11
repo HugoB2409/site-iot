@@ -8,10 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-
 import InputLabel from "@material-ui/core/InputLabel";
-
-//TODO: Liste deroulante pour selectionner a qu'elle user on veut ajouter une temperature
 
 const useStyles = makeStyles({
   button: {

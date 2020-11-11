@@ -23,8 +23,8 @@ const ListTemp = (props) => {
   const classes = useStyles();
   const rows = props.data;
 
-  const handleClick = (sub) => {
-    history.push(`/user/${sub}`);
+  const handleClick = (name) => {
+    history.push(`/user/${name}`);
   };
 
   return (
@@ -45,7 +45,7 @@ const ListTemp = (props) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id} hover onClick={() => handleClick(row.sub)}>
+            <TableRow key={row.id} hover onClick={() => handleClick(row.name)}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>

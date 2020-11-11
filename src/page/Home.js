@@ -6,9 +6,10 @@ import ListTemp from "../component/ListTemp";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import * as subscriptions from "../graphql/subscriptions";
 
 //TODO: UI
-//TODO: Update la liste en temps reel
 
 const useStyles = makeStyles({
   table: {
@@ -29,13 +30,19 @@ const Accueil = () => {
 
   useEffect(() => {
     fetchTodos();
+    const subscription = API.graphql(
+      graphqlOperation(subscriptions.onCreateTodo)
+    ).subscribe({
+      next: (tempData) => {
+        setTemps((temps) => [tempData.value.data.onCreateTodo, ...temps]);
+      },
+    });
   }, []);
 
   const fetchTodos = async () => {
     try {
       const data = await API.graphql(graphqlOperation(listTodos));
-      const temperatures = data.data.listTodos.items;
-      setTemps(temperatures);
+      setTemps(data.data.listTodos.items);
     } catch (err) {
       console.log("error fetching todos");
     }
@@ -55,7 +62,7 @@ const Accueil = () => {
       <Typography variant="h4" className={classes.title}>
         Lecture des temperature en temps reel
       </Typography>
-
+      <Divider />
       <div className={classes.table}>
         <ListTemp data={temps} />
       </div>

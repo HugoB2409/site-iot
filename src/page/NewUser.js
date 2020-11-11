@@ -4,6 +4,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { API, Auth } from "aws-amplify";
 import { makeStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
+//TODO: ajouter pop-up de succes, erreur, etc.
 
 const useStyles = makeStyles({
   button: {
@@ -20,16 +27,23 @@ const useStyles = makeStyles({
 const NewUser = () => {
   const classes = useStyles();
   const initialState = { username: "", email: "", password: "" };
+  const [sub, setSub] = React.useState(0);
   const [userInfo, setUserInfo] = useState(initialState);
+  const [open, setOpen] = React.useState(false);
 
   function setInput(key, value) {
     setUserInfo({ ...userInfo, [key]: value });
   }
 
+  const handleClose = () => {
+    setOpen(false);
+    setUserInfo(initialState);
+  };
+
   const addUser = async () => {
     try {
       if (!userInfo.username || !userInfo.email || !userInfo.password) return;
-      const username = userInfo.username;
+      const username = userInfo.username.split(" ").join("_");
       const password = userInfo.password;
       const email = userInfo.email;
 
@@ -49,8 +63,10 @@ const NewUser = () => {
         },
       };
       const data = await API.post(apiName, path, myInit);
-      console.log(data);
-      setUserInfo(initialState);
+
+      console.log(userInfo);
+      setSub(data.User.Attributes[0].Value);
+      setOpen(true);
     } catch (err) {
       console.log("error creating todo:", err);
     }
@@ -96,6 +112,30 @@ const NewUser = () => {
       >
         Ajouter l'utilisateur
       </Button>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Utilisateur ajouter avec succès."}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Le id du nouveau user est : <br />
+            {sub !== 0 ? <h4>{sub}</h4> : <h4>Nothing</h4>}
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Terminer
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

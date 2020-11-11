@@ -68,7 +68,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-siteiot-dev-81006-deployment",
-          "S3Key": "amplify-builds/AdminQueries2a80aa58-444d2f466c3972357851-build.zip"
+          "S3Key": "amplify-builds/AdminQueries2a80aa58-646b756555516549616d-build.zip"
         }
       }
     },

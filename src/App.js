@@ -15,11 +15,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 //TODO: UX
+//TODO: Refactor
+//TODO: Reformater la date prise
 //TODO: Ajouter pagination aux tableaux
-//TODO: Ajouter liste deroulante lors de l'ajout manuelle de temperature
-//TODO: Afficher le sub a mettre sur la puce apres avoir creer un user
+//TODO: Ajouter du loading durant les request
 //TODO: Afficher les vrai info personnel dans la page UserInfo
-//TODO: Empecher un user a acceder au site
+//TODO: Empecher un user non admin d'a acceder au site
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,7 +51,7 @@ const App = () => {
               <Switch>
                 <Route path="/" exact component={Accueil} />
                 <Route path="/newTemp" exact component={AddTemp} />
-                <Route path="/user/:sub" exact component={UserInfo} />
+                <Route path="/user/:name" exact component={UserInfo} />
                 <Route path="/newUser" exact component={AddUser} />
                 <Route path="/User" exact component={User} />
                 <Route path="/parameter" exact component={Parameter} />
@@ -58,7 +59,6 @@ const App = () => {
               </Switch>
             </Container>
           </div>
-
           <div className={classes.footer}>
             <Copyright />
           </div>

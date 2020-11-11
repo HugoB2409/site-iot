@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -18,7 +18,6 @@ import Box from "@material-ui/core/Box";
 
 //TODO: UI
 //TODO: Ajouter info sur user
-//TODO: Ajouter graphique pour voir l'historique du user
 
 const useStyles = makeStyles({
   table: {
@@ -57,18 +56,39 @@ function TabPanel(props) {
 }
 
 const UserInfo = (props) => {
-  const [temps, setTemps] = useState([]);
   const classes = useStyles();
-  var test = [];
+  const [temps, setTemps] = useState([]);
   const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [users, setUsers] = useState({});
+  const [sub, setSub] = React.useState(0);
+  const [email, setEmail] = React.useState("");
 
   useEffect(() => {
+    getUser();
     fetchTemps();
   }, []);
+
+  const getUser = async () => {
+    let apiName = "AdminQueries";
+    let path = "/getUser";
+    let username = props.match.params.name;
+    let myInit = {
+      queryStringParameters: {
+        username: username,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    };
+    const data = await API.get(apiName, path, myInit);
+
+    console.log(data);
+    setSub(data.UserAttributes[0].Value);
+    setUsers(data);
+  };
 
   const fetchTemps = async () => {
     try {
@@ -84,9 +104,13 @@ const UserInfo = (props) => {
   };
 
   let filter = {
-    sub: {
-      eq: props.match.params.sub,
+    name: {
+      eq: props.match.params.name,
     },
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -95,10 +119,13 @@ const UserInfo = (props) => {
         Information supplementaires
       </Typography>
       <Typography variant="h6" className={classes.title}>
-        Nom: Hugo Belanger
+        Nom: {users.Username}
       </Typography>
       <Typography variant="h6" className={classes.title}>
         Email: hugo@gmail.com
+      </Typography>
+      <Typography variant="h6" className={classes.title}>
+        Id:
       </Typography>
 
       <AppBar position="static">

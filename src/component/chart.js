@@ -24,7 +24,7 @@ const chart = (props) => {
         }),
         fill: false,
         backgroundColor: "rgb(0, 255, 0)",
-        borderColor: "rgba(0, 255, 0, 1)",
+        borderColor: "rgba(0, 255, 0, 0.5)",
       },
       {
         label: "Limite(°C)",
@@ -33,7 +33,7 @@ const chart = (props) => {
         }),
         fill: false,
         backgroundColor: "rgb(255, 0, 0)",
-        borderColor: "rgba(255, 0, 0, 1)",
+        borderColor: "rgba(255, 0, 0, 0.5)",
       },
     ],
   };

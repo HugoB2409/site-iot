@@ -21,8 +21,8 @@ const ListUser = (props) => {
   const rows = props.data;
   console.log(rows[0]);
 
-  const handleClick = (sub) => {
-    history.push(`/user/${sub}`);
+  const handleClick = (name) => {
+    history.push(`/user/${name}`);
   };
 
   return (
@@ -46,7 +46,7 @@ const ListUser = (props) => {
             <TableRow
               key={row.Username}
               hover
-              onClick={() => handleClick(row.Attributes[0].Value)}
+              onClick={() => handleClick(row.Username)}
             >
               <TableCell component="th" scope="row">
                 {row.Username}

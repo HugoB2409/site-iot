@@ -181,7 +181,7 @@ app.post("/enableUser", async (req, res, next) => {
 
 app.get("/getUser", async (req, res, next) => {
   if (!req.query.username) {
-    const err = new Error("username is required");
+    const err = new Error("username is required " + req.query.username);
     err.statusCode = 400;
     return next(err);
   }

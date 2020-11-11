@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 
 const User = () => {
   const classes = useStyles();
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -40,7 +39,6 @@ const User = () => {
       },
     };
     const data = await API.get(apiName, path, myInit);
-    console.log(data);
     setUsers(data.Users);
   };
 

@@ -10,6 +10,7 @@
     "@reactchartjs/react-chart.js": "^1.0.0-rc.2",
     "aws-amplify": "^3.3.4",
     "chart.js": "^2.9.4",
+    "lodash": "^4.17.20",
     "react": "^16.14.0",
     "react-charts": "^2.0.0-beta.7",
     "react-dom": "^16.14.0",

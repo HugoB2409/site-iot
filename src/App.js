@@ -18,14 +18,13 @@ import { makeStyles } from "@material-ui/core/styles";
 //TODO: Rendre professionel
 //TODO: Refactor
 //TODO: Reformater la date prise
-//TODO: Ajouter pagination aux tableaux
 //TODO: Ajouter du loading durant les request
 //TODO: Empecher un user non admin d'a acceder au site
 
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "relative",
-    minHeight: "100vh",
+    minHeight: "98vh",
   },
   content: {
     paddingBottom: "4rem",

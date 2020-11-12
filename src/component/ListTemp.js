@@ -105,6 +105,7 @@ const ListTemp = (props) => {
   const rows = props.data;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  console.log(rows);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -149,7 +150,7 @@ const ListTemp = (props) => {
               <TableRow
                 hover
                 onClick={() => handleClick(row.name)}
-                key={row.createdAt}
+                key={row.id}
               >
                 <TableCell component="th" scope="row">
                   {row.name}

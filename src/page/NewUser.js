@@ -9,6 +9,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
+import IconButton from "@material-ui/core/IconButton";
+import Collapse from "@material-ui/core/Collapse";
+import CloseIcon from "@material-ui/icons/Close";
+import { FastForward } from "@material-ui/icons";
 
 //TODO: ajouter pop-up de succes, erreur, etc.
 
@@ -17,10 +24,14 @@ const useStyles = makeStyles({
     float: "right",
   },
   field: {
-    margin: 20,
+    marginTop: 20,
   },
-  helper: {
-    margin: 50,
+  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  grow: {
+    flexGrow: 1,
+  },
+  title: {
+    marginTop: 10,
   },
 });
 
@@ -30,6 +41,7 @@ const NewUser = () => {
   const [sub, setSub] = React.useState(0);
   const [userInfo, setUserInfo] = useState(initialState);
   const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = React.useState(false);
 
   function setInput(key, value) {
     setUserInfo({ ...userInfo, [key]: value });
@@ -37,6 +49,7 @@ const NewUser = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setAlertOpen(true);
     setUserInfo(initialState);
   };
 
@@ -74,9 +87,10 @@ const NewUser = () => {
 
   return (
     <div>
-      <Typography variant="h2" gutterBottom>
-        Nouveau utilisateur
+      <Typography variant="h4" className={classes.title}>
+        Ajoutée un utilisateur
       </Typography>
+      <Divider />
       <TextField
         id="standard-basic"
         label="Nom"
@@ -104,14 +118,22 @@ const NewUser = () => {
         className={classes.field}
         onChange={(event) => setInput("password", event.target.value)}
       />
-      <Button
-        variant="contained"
-        className={classes.button}
-        color="secondary"
-        onClick={addUser}
-      >
-        Ajouter l'utilisateur
-      </Button>
+      <div className={classes.test}>
+        <Link to="/User" className={classes.link}>
+          <Button variant="contained" className={classes.button}>
+            Retour
+          </Button>
+        </Link>
+        <div className={classes.grow} />
+        <Button
+          variant="contained"
+          className={classes.button}
+          color="secondary"
+          onClick={addUser}
+        >
+          Ajouter l'utilisateur
+        </Button>
+      </div>
 
       <Dialog
         open={open}

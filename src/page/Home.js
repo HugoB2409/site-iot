@@ -14,6 +14,7 @@ import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import _, { debounce } from "lodash";
 
 //TODO: UI
 
@@ -81,7 +82,10 @@ const Accueil = () => {
       graphqlOperation(subscriptions.onCreateTodo)
     ).subscribe({
       next: (tempData) => {
-        setTemps((temps) => [tempData.value.data.onCreateTodo, ...temps]);
+        console.log(tempData.value.data.onCreateTodo);
+        if (tempData.value.data.onCreateTodo != null) {
+          setTemps((temps) => [tempData.value.data.onCreateTodo, ...temps]);
+        }
       },
     });
   }, []);
@@ -89,6 +93,33 @@ const Accueil = () => {
   const fetchTodos = async () => {
     try {
       const data = await API.graphql(graphqlOperation(listTodos));
+      setTemps(data.data.listTodos.items);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  };
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    handleFilter(value);
+  };
+
+  const handleFilter = debounce((val) => {
+    searchTodos(val);
+  }, 250);
+
+  const searchTodos = async (val) => {
+    try {
+      const data = await API.graphql({
+        query: listTodos,
+        variables: {
+          filter: {
+            name: {
+              contains: val,
+            },
+          },
+        },
+      });
       setTemps(data.data.listTodos.items);
     } catch (err) {
       console.log("error fetching todos");
@@ -112,6 +143,7 @@ const Accueil = () => {
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
+            onChange={onChange}
             inputProps={{ "aria-label": "search" }}
           />
         </div>

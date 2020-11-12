@@ -9,16 +9,29 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
+import { isNumber } from "lodash";
 
 const useStyles = makeStyles({
-  button: {
-    float: "right",
+  title: {
+    marginTop: 10,
   },
   field: {
-    margin: 20,
+    marginTop: 30,
+  },
+  button: {
+    marginRight: 20,
   },
   helper: {
     margin: 50,
+  },
+  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  grow: {
+    flexGrow: 1,
+  },
+  link: {
+    textDecoration: "none",
   },
 });
 
@@ -71,9 +84,10 @@ const NewTemp = () => {
 
   return (
     <div>
-      <Typography variant="h2" gutterBottom>
-        Température
+      <Typography variant="h4" className={classes.title}>
+        Ajoutée une température
       </Typography>
+      <Divider />
       <FormControl fullWidth variant="outlined" className={classes.field}>
         <InputLabel id="demo-simple-select-label">Nom</InputLabel>
         <Select
@@ -91,24 +105,40 @@ const NewTemp = () => {
             </MenuItem>
           ))}
         </Select>
+
+        <div className={classes.test}>
+          <TextField
+            id="standard-basic"
+            type="number"
+            label="Température corporelle(°C)"
+            variant="outlined"
+            fullWidth
+            value={tempInfo.temperature}
+            className={classes.button}
+            onChange={(event) => {
+              setInput("temperature", event.target.value);
+            }}
+          />
+          <TextField
+            id="standard-basic"
+            type="number"
+            label="Température ambiante(°C)"
+            variant="outlined"
+            fullWidth
+          />
+        </div>
       </FormControl>
-      <TextField
-        id="standard-basic"
-        label="Temperature"
-        variant="outlined"
-        fullWidth
-        value={tempInfo.temperature}
-        className={classes.field}
-        onChange={(event) => setInput("temperature", event.target.value)}
-      />
-      <Button
-        variant="contained"
-        className={classes.button}
-        color="secondary"
-        onClick={addTemp}
-      >
-        Ajouter la température
-      </Button>
+      <div className={classes.test}>
+        <Link to="/" className={classes.link}>
+          <Button variant="contained" className={classes.button}>
+            Retour
+          </Button>
+        </Link>
+        <div className={classes.grow} />
+        <Button variant="contained" color="secondary" onClick={addTemp}>
+          Ajouter la température
+        </Button>
+      </div>
     </div>
   );
 };

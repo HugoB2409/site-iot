@@ -15,6 +15,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 //TODO: UI
 //TODO: Ajouter info sur user
@@ -24,7 +29,11 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   title: {
-    marginTop: 30,
+    marginTop: 10,
+  },
+  accordion: {
+    marginTop: 35,
+    marginBottom: 35,
   },
 });
 
@@ -116,18 +125,59 @@ const UserInfo = (props) => {
   return (
     <div>
       <Typography variant="h4" className={classes.title}>
-        Information supplementaires
+        {users.Username}
       </Typography>
-      {users.UserAttributes !== undefined ? (
-        users.UserAttributes.map((value) => (
-          <Typography variant="h6" className={classes.title} key={value.Name}>
-            {value.Name}: {value.Value}
-          </Typography>
-        ))
-      ) : (
-        <h4>nothing</h4>
-      )}
+      <Divider />
 
+      <div className={classes.accordion}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Accordion 1</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+              eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>
+              Informations supplémentaires
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {users.UserAttributes !== undefined ? (
+              users.UserAttributes.map((value) => (
+                <Typography
+                  variant="h6"
+                  className={classes.title}
+                  key={value.Name}
+                >
+                  {value.Name}: {value.Value}
+                </Typography>
+              ))
+            ) : (
+              <h4>nothing</h4>
+            )}
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <Typography variant="h5" className={classes.title}>
+        Historique
+      </Typography>
+      <Divider />
       <AppBar position="static">
         <Tabs
           value={value}
@@ -140,15 +190,9 @@ const UserInfo = (props) => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Typography variant="h5" className={classes.title}>
-          Historique
-        </Typography>
         <Chart data={temps} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Typography variant="h5" className={classes.title}>
-          Historique
-        </Typography>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>

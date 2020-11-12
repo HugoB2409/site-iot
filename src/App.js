@@ -15,11 +15,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 //TODO: UX
+//TODO: Rendre professionel
 //TODO: Refactor
 //TODO: Reformater la date prise
 //TODO: Ajouter pagination aux tableaux
 //TODO: Ajouter du loading durant les request
-//TODO: Afficher les vrai info personnel dans la page UserInfo
 //TODO: Empecher un user non admin d'a acceder au site
 
 const useStyles = makeStyles((theme) => ({

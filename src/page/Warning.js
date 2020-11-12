@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import { API } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
 import { useHistory } from "react-router-dom";
+import ListWaring from "../component/ListWarning";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import AddIcon from "@material-ui/icons/Add";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import { Link } from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     marginTop: 10,
   },
@@ -21,9 +23,50 @@ const useStyles = makeStyles({
     margin: 20,
   },
   title: {
-    marginTop: 30,
+    marginTop: 10,
   },
-});
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.black, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "40%",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "40ch",
+    },
+  },
+  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  grow: {
+    flexGrow: 1,
+  },
+  iconButton: {},
+}));
 
 const Warning = () => {
   const classes = useStyles();
@@ -59,40 +102,32 @@ const Warning = () => {
   return (
     <div>
       <Typography variant="h4" className={classes.title}>
-        Cas suspect
+        Temperatures suspectes
       </Typography>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <b>Nom</b>
-              </TableCell>
-              <TableCell align="right">
-                <b>Temperature(°C)</b>
-              </TableCell>
-              <TableCell align="right">
-                <b>Date prise</b>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {temps.map((row) => (
-              <TableRow
-                key={row.id}
-                hover
-                onClick={() => handleClick(row.name)}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.temperature}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Divider />
+      <div className={classes.test}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
+        </div>
+        <div className={classes.grow} />
+        <Tooltip title="Filtrer">
+          <IconButton aria-label="filter list" className={classes.iconButton}>
+            <FilterListIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+      </div>
+
+      <ListWaring data={temps} />
     </div>
   );
 };

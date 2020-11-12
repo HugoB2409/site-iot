@@ -118,15 +118,15 @@ const UserInfo = (props) => {
       <Typography variant="h4" className={classes.title}>
         Information supplementaires
       </Typography>
-      <Typography variant="h6" className={classes.title}>
-        Nom: {users.Username}
-      </Typography>
-      <Typography variant="h6" className={classes.title}>
-        Email: hugo@gmail.com
-      </Typography>
-      <Typography variant="h6" className={classes.title}>
-        Id:
-      </Typography>
+      {users.UserAttributes !== undefined ? (
+        users.UserAttributes.map((value) => (
+          <Typography variant="h6" className={classes.title} key={value.Name}>
+            {value.Name}: {value.Value}
+          </Typography>
+        ))
+      ) : (
+        <h4>nothing</h4>
+      )}
 
       <AppBar position="static">
         <Tabs

@@ -25,9 +25,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 //TODO: Ajouter info sur user
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
   title: {
     marginTop: 10,
   },
@@ -124,98 +121,118 @@ const UserInfo = (props) => {
 
   return (
     <div>
-      <Typography variant="h4" className={classes.title}>
-        {users.Username}
-      </Typography>
-      <Divider />
+      {users.Username ? (
+        <div>
+          <Typography variant="h4" className={classes.title}>
+            {users.Username}
+          </Typography>
+          <Divider />
 
-      <div className={classes.accordion}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>Accordion 1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              Informations supplémentaires
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {users.UserAttributes !== undefined ? (
-              users.UserAttributes.map((value) => (
+          <div className={classes.accordion}>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading}>
+                  Informations
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
                 <Typography
                   variant="h6"
                   className={classes.title}
                   key={value.Name}
                 >
-                  {value.Name}: {value.Value}
+                  Status: {users.UserStatus}
                 </Typography>
-              ))
-            ) : (
-              <h4>nothing</h4>
-            )}
-          </AccordionDetails>
-        </Accordion>
-      </div>
+                <Typography
+                  variant="h6"
+                  className={classes.title}
+                  key={value.Name}
+                >
+                  Date creer: {users.UserCreateDate}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  className={classes.title}
+                  key={value.Name}
+                >
+                  Active: {users.Enabled}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2a-content"
+                id="panel2a-header"
+              >
+                <Typography className={classes.heading}>
+                  Informations supplémentaires
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {users.UserAttributes !== undefined ? (
+                  users.UserAttributes.map((value) => (
+                    <Typography
+                      variant="h6"
+                      className={classes.title}
+                      key={value.Name}
+                    >
+                      {value.Name}: {value.Value}
+                    </Typography>
+                  ))
+                ) : (
+                  <h4>nothing</h4>
+                )}
+              </AccordionDetails>
+            </Accordion>
+          </div>
 
-      <Typography variant="h5" className={classes.title}>
-        Historique
-      </Typography>
-      <Divider />
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-          centered
-        >
-          <Tab label="Graphique" {...a11yProps(0)} />
-          <Tab label="Tableau" {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <Chart data={temps} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Nom</TableCell>
-                <TableCell align="right">Temperature(°C)</TableCell>
-                <TableCell align="right">Date</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {temps.map((row) => (
-                <TableRow key={row.id} hover>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.temperature}</TableCell>
-                  <TableCell align="right">{row.createdAt}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </TabPanel>
+          <AppBar position="static">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+              centered
+            >
+              <Tab label="Graphique" {...a11yProps(0)} />
+              <Tab label="Tableau" {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+          <TabPanel value={value} index={0}>
+            <Chart data={temps} />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Nom</TableCell>
+                    <TableCell align="right">Temperature(°C)</TableCell>
+                    <TableCell align="right">Date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {temps.map((row) => (
+                    <TableRow key={row.id} hover>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.temperature}</TableCell>
+                      <TableCell align="right">{row.createdAt}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </TabPanel>
+        </div>
+      ) : (
+        <h1>loading...</h1>
+      )}
     </div>
   );
 };

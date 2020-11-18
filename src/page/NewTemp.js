@@ -11,7 +11,6 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
-import { isNumber } from "lodash";
 
 const useStyles = makeStyles({
   title: {
@@ -113,7 +112,6 @@ const NewTemp = () => {
             label="Température corporelle(°C)"
             variant="outlined"
             fullWidth
-            value={tempInfo.temperature}
             className={classes.button}
             onChange={(event) => {
               setInput("temperature", event.target.value);
@@ -127,18 +125,18 @@ const NewTemp = () => {
             fullWidth
           />
         </div>
-      </FormControl>
-      <div className={classes.test}>
-        <Link to="/" className={classes.link}>
-          <Button variant="contained" className={classes.button}>
-            Retour
+        <div className={classes.test}>
+          <Link to="/" className={classes.link}>
+            <Button variant="contained" className={classes.button}>
+              Retour
+            </Button>
+          </Link>
+          <div className={classes.grow} />
+          <Button variant="contained" color="secondary" onClick={addTemp}>
+            Ajouter la température
           </Button>
-        </Link>
-        <div className={classes.grow} />
-        <Button variant="contained" color="secondary" onClick={addTemp}>
-          Ajouter la température
-        </Button>
-      </div>
+        </div>
+      </FormControl>
     </div>
   );
 };

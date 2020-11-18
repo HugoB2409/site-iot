@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 const User = () => {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
+  const [filterUsers, setFilterUsers] = useState([]);
 
   useEffect(() => {
     getUsers();
@@ -88,6 +89,15 @@ const User = () => {
     };
     const data = await API.get(apiName, path, myInit);
     setUsers(data.Users);
+    setFilterUsers(data.Users);
+  };
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    let array = users.filter((o) =>
+      o.Username.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilterUsers(array);
   };
 
   return (
@@ -107,6 +117,7 @@ const User = () => {
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
+            onChange={onChange}
             inputProps={{ "aria-label": "search" }}
           />
         </div>
@@ -124,7 +135,7 @@ const User = () => {
           </Tooltip>
         </Link>
       </div>
-      <ListUser data={users} />
+      <ListUser data={filterUsers} />
     </div>
   );
 };

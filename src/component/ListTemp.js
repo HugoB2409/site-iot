@@ -104,7 +104,7 @@ const ListTemp = (props) => {
   const classes = useStyles();
   const rows = props.data;
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   console.log(rows);
 
   const emptyRows =

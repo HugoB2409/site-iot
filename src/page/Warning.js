@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
+import _, { debounce } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -83,6 +84,36 @@ const Warning = () => {
     },
   };
 
+  const onChange = (e) => {
+    const value = e.target.value;
+    handleFilter(value);
+  };
+
+  const handleFilter = debounce((val) => {
+    searchTodos(val);
+  }, 250);
+
+  const searchTodos = async (val) => {
+    try {
+      const data = await API.graphql({
+        query: listTodos,
+        variables: {
+          filter: {
+            name: {
+              contains: val,
+            },
+            temperature: {
+              gt: 38,
+            },
+          },
+        },
+      });
+      setTemps(data.data.listTodos.items);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  };
+
   const fetchTodos = async () => {
     try {
       const data = await API.graphql({
@@ -116,6 +147,7 @@ const Warning = () => {
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
+            onChange={onChange}
             inputProps={{ "aria-label": "search" }}
           />
         </div>

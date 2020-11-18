@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  customizeToolbar: {
+    minHeight: 72,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -61,9 +64,7 @@ const NavigationBar = () => {
 
   const signOut = async () => {
     try {
-      await Auth.signOut().then(() => {
-        window.location.reload();
-      });
+      await Auth.signOut({ global: true });
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -72,7 +73,7 @@ const NavigationBar = () => {
   return (
     <React.Fragment>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar className={classes.customizeToolbar}>
           <Link to="/" className={classes.link}>
             <Typography variant="h4" className={classes.title}>
               TempReader
@@ -127,7 +128,6 @@ const NavigationBar = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <Toolbar />
     </React.Fragment>
   );
 };

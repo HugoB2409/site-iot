@@ -1,5 +1,4 @@
 import React from "react";
-//import { Chart } from "react-charts";
 import { Line } from "@reactchartjs/react-chart.js";
 
 const chart = (props) => {

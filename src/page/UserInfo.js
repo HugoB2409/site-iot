@@ -20,6 +20,7 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Button from "@material-ui/core/Button";
 
 //TODO: UI
 //TODO: Ajouter info sur user
@@ -31,6 +32,9 @@ const useStyles = makeStyles({
   accordion: {
     marginTop: 35,
     marginBottom: 35,
+  },
+  button: {
+    margin: 15,
   },
 });
 
@@ -66,8 +70,7 @@ const UserInfo = (props) => {
   const [temps, setTemps] = useState([]);
   const [value, setValue] = React.useState(0);
   const [users, setUsers] = useState({});
-  const [sub, setSub] = React.useState(0);
-  const [email, setEmail] = React.useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     getUser();
@@ -90,9 +93,6 @@ const UserInfo = (props) => {
       },
     };
     const data = await API.get(apiName, path, myInit);
-
-    console.log(data);
-    setSub(data.UserAttributes[0].Value);
     setUsers(data);
   };
 
@@ -103,6 +103,7 @@ const UserInfo = (props) => {
         variables: { filter: filter },
       });
       const temperatures = tempData.data.listTodos.items;
+      console.log(temperatures);
       setTemps(temperatures);
     } catch (err) {
       console.log("error fetching temperature");
@@ -117,6 +118,50 @@ const UserInfo = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const enableUser = async () => {
+    try {
+      let apiName = "AdminQueries";
+      let path = "/enableUser";
+      let myInit = {
+        body: {
+          username: users.Username,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${(await Auth.currentSession())
+            .getAccessToken()
+            .getJwtToken()}`,
+        },
+      };
+
+      const data = await API.post(apiName, path, myInit);
+    } catch (err) {
+      console.log("error creating todo:", err);
+    }
+  };
+
+  const disableUser = async () => {
+    try {
+      let apiName = "AdminQueries";
+      let path = "/disableUser";
+      let myInit = {
+        body: {
+          username: users.Username,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${(await Auth.currentSession())
+            .getAccessToken()
+            .getJwtToken()}`,
+        },
+      };
+
+      const data = await API.post(apiName, path, myInit);
+    } catch (err) {
+      console.log("error creating todo:", err);
+    }
   };
 
   return (
@@ -190,6 +235,22 @@ const UserInfo = (props) => {
               </AccordionDetails>
             </Accordion>
           </div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={enableUser}
+            className={classes.button}
+          >
+            Activer
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={disableUser}
+            className={classes.button}
+          >
+            Desactiver
+          </Button>
 
           <AppBar position="static">
             <Tabs

@@ -4,4 +4,5 @@ type Todo @model {
   name: String!
   temperature: Float
   date: AWSDateTime
+  url: String
 }

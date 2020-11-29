@@ -12,6 +12,10 @@ import { Auth } from "aws-amplify";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { Container } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Badge from "@material-ui/core/Badge";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,24 +23,35 @@ const useStyles = makeStyles((theme) => ({
   },
   customizeToolbar: {
     minHeight: 72,
+    padding: 0,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 20,
+    "&:hover": {
+      cursor: "pointer",
+      color: fade(theme.palette.common.white, 0.8),
+    },
   },
-  title: {
-    flexGrow: 1,
+  menuButton2: {
+    marginLeft: 20,
+    "&:hover": {
+      cursor: "pointer",
+      color: fade(theme.palette.common.white, 0.8),
+    },
   },
   link: {
-    flexGrow: 1,
     textDecoration: "none",
     color: fade(theme.palette.common.white, 1),
     "&:hover": {
       color: fade(theme.palette.common.white, 0.8),
     },
   },
+  logo: {
+    maxWidth: 64,
+  },
 }));
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
   let history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -71,65 +86,99 @@ const NavigationBar = () => {
   };
 
   return (
-    <React.Fragment>
-      <AppBar position="fixed">
+    <AppBar position="fixed">
+      <Container>
         <Toolbar className={classes.customizeToolbar}>
           <Link to="/" className={classes.link}>
-            <Typography variant="h4" className={classes.title}>
-              TempReader
-            </Typography>
+            <img src="lol.png" alt="logo" className={classes.logo} />
           </Link>
-          <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleClickUser}
-              color="inherit"
-            >
+          <div className={classes.root} />
+
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={props.changeTheme}
+            color="inherit"
+          >
+            <Brightness4Icon fontSize="large" />
+          </IconButton>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClickUser}
+            color="inherit"
+          >
+            <Badge badgeContent={0} color="secondary">
               <PeopleIcon fontSize="large" />
-            </IconButton>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleClickWarning}
-              color="inherit"
-            >
+            </Badge>
+          </IconButton>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClickWarning}
+            color="inherit"
+          >
+            <Badge badgeContent={1} color="secondary">
               <WarningIcon fontSize="large" />
-            </IconButton>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle fontSize="large" />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClickParam}>Parametres</MenuItem>
-              <MenuItem onClick={signOut}>Deconnexion</MenuItem>
-            </Menu>
-          </div>
+            </Badge>
+          </IconButton>
+
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle fontSize="large" />
+          </IconButton>
+
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClickParam}>Parametres</MenuItem>
+            <MenuItem onClick={signOut}>Deconnexion</MenuItem>
+          </Menu>
         </Toolbar>
-      </AppBar>
-    </React.Fragment>
+      </Container>
+    </AppBar>
   );
 };
 
 export default NavigationBar;
+
+/*
+<IconButton
+  aria-label="account of current user"
+  aria-controls="menu-appbar"
+  aria-haspopup="true"
+  onClick={handleClickUser}
+  color="inherit"
+>
+  <PeopleIcon fontSize="large" />
+</IconButton>
+<IconButton
+  aria-label="account of current user"
+  aria-controls="menu-appbar"
+  aria-haspopup="true"
+  onClick={handleClickWarning}
+  color="inherit"
+>
+  <WarningIcon fontSize="large" />
+</IconButton>
+*/

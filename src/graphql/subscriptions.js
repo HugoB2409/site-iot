@@ -9,6 +9,7 @@ export const onCreateTodo = /* GraphQL */ `
       name
       temperature
       date
+      url
       createdAt
       updatedAt
     }
@@ -22,6 +23,7 @@ export const onUpdateTodo = /* GraphQL */ `
       name
       temperature
       date
+      url
       createdAt
       updatedAt
     }
@@ -35,6 +37,7 @@ export const onDeleteTodo = /* GraphQL */ `
       name
       temperature
       date
+      url
       createdAt
       updatedAt
     }

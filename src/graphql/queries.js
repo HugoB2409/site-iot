@@ -9,6 +9,7 @@ export const getTodo = /* GraphQL */ `
       name
       temperature
       date
+      url
       createdAt
       updatedAt
     }
@@ -27,6 +28,7 @@ export const listTodos = /* GraphQL */ `
         name
         temperature
         date
+        url
         createdAt
         updatedAt
       }

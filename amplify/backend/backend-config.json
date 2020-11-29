@@ -68,5 +68,11 @@
         }
       ]
     }
+  },
+  "storage": {
+    "ProjetIOT": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

@@ -11,6 +11,11 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles({
   title: {
@@ -25,7 +30,11 @@ const useStyles = makeStyles({
   helper: {
     margin: 50,
   },
-  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  test: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 20,
+  },
   grow: {
     flexGrow: 1,
   },
@@ -39,6 +48,11 @@ const NewTemp = () => {
   const initialState = { name: "", temperature: "", sub: "" };
   const [tempInfo, setTempInfo] = useState(initialState);
   const [users, setUsers] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     getUsers();
@@ -137,6 +151,29 @@ const NewTemp = () => {
           </Button>
         </div>
       </FormControl>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Utilisateur ajouter avec succès."}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Le id du nouveau user est : <br />
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Terminer
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

@@ -1,5 +1,4 @@
-/* src/App.js */
-import React from "react";
+import React, { useState } from "react";
 import Accueil from "./page/Home";
 import UserInfo from "./page/UserInfo";
 import AddTemp from "./page/NewTemp";
@@ -10,7 +9,7 @@ import Warning from "./page/Warning";
 import Container from "@material-ui/core/Container";
 import NavBar from "./component/NavigationBar";
 import Copyright from "./component/Copyright";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import TempInfo from "./page/TempInfo";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   createMuiTheme,
@@ -19,6 +18,7 @@ import {
 } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import indigo from "@material-ui/core/colors/indigo";
+import purple from "@material-ui/core/colors/purple";
 
 //TODO: Changer le login
 //TODO: Page de parametres ??
@@ -43,33 +43,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: indigo[500],
-    },
-    secondary: {
-      main: red[500],
-    },
-  },
-});
-
 const App = (props) => {
   const classes = useStyles();
+  const [darkState, setDarkState] = useState(false);
+
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: "dark",
+      grey: {
+        900: "#121212", // overrides success
+      },
+      background: {
+        paper: "#000000",
+      },
+      primary: {
+        main: purple[500],
+      },
+      secondary: {
+        main: indigo[500],
+      },
+    },
+  });
+
+  const theme = createMuiTheme({
+    palette: {
+      type: "light",
+      background: {
+        default: "#000000",
+      },
+      primary: {
+        main: indigo[500],
+      },
+      secondary: {
+        main: red[500],
+      },
+    },
+  });
+
+  const palletType = darkState ? darkTheme : theme;
+
+  const handleThemeChange = () => {
+    setDarkState(!darkState);
+  };
 
   return (
     <div>
-      {props.authState == "signedIn" ? (
+      {props.authState === "signedIn" ? (
         <Router>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={palletType}>
             <div className={classes.container}>
-              <NavBar />
+              <NavBar changeTheme={handleThemeChange} />
               <div className={classes.content}>
                 <Container>
                   <Switch>
                     <Route path="/" exact component={Accueil} />
                     <Route path="/newTemp" exact component={AddTemp} />
                     <Route path="/user/:name" exact component={UserInfo} />
+                    <Route path="/temp/:id" exact component={TempInfo} />
                     <Route path="/newUser" exact component={AddUser} />
                     <Route path="/User" exact component={User} />
                     <Route path="/parameter" exact component={Parameter} />
@@ -84,7 +114,7 @@ const App = (props) => {
           </ThemeProvider>
         </Router>
       ) : (
-        <></>
+        <div></div>
       )}
     </div>
   );

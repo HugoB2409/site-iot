@@ -15,7 +15,6 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 //TODO: Ajouter des filtre
@@ -119,8 +118,8 @@ const ListTemp = (props) => {
     setPage(0);
   };
 
-  const handleClick = (name) => {
-    history.push(`/user/${name}`);
+  const handleClick = (id) => {
+    history.push(`/temp/${id}`);
   };
 
   return (
@@ -147,11 +146,7 @@ const ListTemp = (props) => {
               ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : rows
             ).map((row) => (
-              <TableRow
-                hover
-                onClick={() => handleClick(row.name)}
-                key={row.id}
-              >
+              <TableRow hover onClick={() => handleClick(row.id)} key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>

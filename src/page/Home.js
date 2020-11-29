@@ -3,7 +3,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import { API, graphqlOperation } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
 import ListTemp from "../component/ListTemp";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -14,9 +13,7 @@ import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import _, { debounce } from "lodash";
-
-//TODO: UI
+import { debounce } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -57,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -65,11 +61,14 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
-  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  test: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 20,
+  },
   grow: {
     flexGrow: 1,
   },
-  iconButton: {},
 }));
 
 const Accueil = () => {
@@ -155,7 +154,7 @@ const Accueil = () => {
         </Tooltip>
         <Link to="/newTemp">
           <Tooltip title="Ajouter temperature">
-            <IconButton color="secondary" className={classes.iconButton}>
+            <IconButton color="secondary">
               <AddIcon fontSize="large" />
             </IconButton>
           </Tooltip>

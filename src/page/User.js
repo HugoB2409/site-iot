@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ListUser from "../component/ListUser";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { API, Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
@@ -52,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -60,11 +58,14 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
-  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  test: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 20,
+  },
   grow: {
     flexGrow: 1,
   },
-  iconButton: {},
 }));
 
 const User = () => {

@@ -3,17 +3,14 @@ import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { API } from "aws-amplify";
 import { listTodos } from "../graphql/queries";
-import { useHistory } from "react-router-dom";
 import ListWaring from "../component/ListWarning";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import { Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import _, { debounce } from "lodash";
+import { debounce } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -54,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -62,17 +58,19 @@ const useStyles = makeStyles((theme) => ({
       width: "40ch",
     },
   },
-  test: { display: "flex", alignItems: "center", marginTop: 20 },
+  test: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 20,
+  },
   grow: {
     flexGrow: 1,
   },
-  iconButton: {},
 }));
 
 const Warning = () => {
   const classes = useStyles();
   const [temps, setTemps] = useState([]);
-  let history = useHistory();
 
   useEffect(() => {
     fetchTodos();
@@ -126,10 +124,6 @@ const Warning = () => {
     }
   };
 
-  const handleClick = (name) => {
-    history.push(`/user/${name}`);
-  };
-
   return (
     <div>
       <Typography variant="h4" className={classes.title}>
@@ -153,12 +147,11 @@ const Warning = () => {
         </div>
         <div className={classes.grow} />
         <Tooltip title="Filtrer">
-          <IconButton aria-label="filter list" className={classes.iconButton}>
+          <IconButton aria-label="filter list">
             <FilterListIcon fontSize="large" />
           </IconButton>
         </Tooltip>
       </div>
-
       <ListWaring data={temps} />
     </div>
   );

@@ -148,8 +148,12 @@ const ListUser = (props) => {
                 <TableCell component="th" scope="row">
                   {row.Username}
                 </TableCell>
-                <TableCell align="right">{row.UserCreateDate}</TableCell>
-                <TableCell align="right">{row.UserStatus}</TableCell>
+                <TableCell align="right" style={{ width: 200 }}>
+                  {row.UserStatus}
+                </TableCell>
+                <TableCell align="right" style={{ width: 200 }}>
+                  {row.UserCreateDate}
+                </TableCell>
               </TableRow>
             ))}
 

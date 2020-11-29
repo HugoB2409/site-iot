@@ -11,11 +11,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
-import Alert from "@material-ui/lab/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import Collapse from "@material-ui/core/Collapse";
-import CloseIcon from "@material-ui/icons/Close";
-import { FastForward } from "@material-ui/icons";
 
 //TODO: ajouter pop-up de succes, erreur, etc.
 
@@ -41,7 +36,6 @@ const NewUser = () => {
   const [sub, setSub] = React.useState(0);
   const [userInfo, setUserInfo] = useState(initialState);
   const [open, setOpen] = React.useState(false);
-  const [alertOpen, setAlertOpen] = React.useState(false);
 
   function setInput(key, value) {
     setUserInfo({ ...userInfo, [key]: value });
@@ -49,7 +43,6 @@ const NewUser = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setAlertOpen(true);
     setUserInfo(initialState);
   };
 
@@ -75,9 +68,8 @@ const NewUser = () => {
             .getJwtToken()}`,
         },
       };
-      const data = await API.post(apiName, path, myInit);
 
-      console.log(userInfo);
+      const data = await API.post(apiName, path, myInit);
       setSub(data.User.Attributes[0].Value);
       setOpen(true);
     } catch (err) {

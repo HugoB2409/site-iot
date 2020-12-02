@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API, graphqlOperation, Storage } from "aws-amplify";
-import * as queries from "../graphql/queries";
+import * as queries from "../../graphql/queries";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+
+//TODO: UI
 
 const useStyles = makeStyles({
   title: {

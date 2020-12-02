@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API, Auth } from "aws-amplify";
-import { listTodos } from "../graphql/queries";
+import { listTodos } from "../../graphql/queries";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Chart from "../component/chart";
+import Chart from "../../component/chart";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -23,7 +23,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 
 //TODO: UI
-//TODO: Ajouter info sur user
+//TODO: Combiner les button activer et desactiver en un seul
+//TODO: Permettre de pouvoir cliquer sur un element du graphiquee ou une ranger du tableau pour naviguer a la page d'info sur la temperature
+//TODO: Faire que le graphique affiche seuleument les 7 dernieres temperature
 
 const useStyles = makeStyles({
   title: {

@@ -12,7 +12,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
 
+//TODO: Ajouter validations et message d'erreurs
 //TODO: ajouter pop-up de succes, erreur, etc.
+//TODO: Apres avoir creer le user, rediriger vers la page de liste des users
 
 const useStyles = makeStyles({
   button: {

@@ -15,6 +15,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import { debounce } from "lodash";
 
+//TODO: Reformatter la date
+//TODO: Faire marcher le filtre ou le retirer
+
 const useStyles = makeStyles((theme) => ({
   table: {
     marginTop: 10,

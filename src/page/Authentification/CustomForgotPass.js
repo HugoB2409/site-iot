@@ -1,30 +1,18 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-import Avatar from "@material-ui/core/Avatar";
+import Copyright from "../../component/Copyright";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link href="/">TempReader</Link> {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 //TODO: Ajouter message d'erreur
 
 const CustomForgotPass = (props) => {
-  console.log(props);
   const { authState, onStateChange } = props;
   const [formData, setFormData] = useState({
     username: "",
@@ -39,6 +27,7 @@ const CustomForgotPass = (props) => {
   const signInClick = async () => {
     try {
       await Auth.forgotPassword(formData.username);
+      props.setUsername(formData.username);
       onStateChange("forgotPasswordSubmit");
     } catch (error) {
       console.log(error);
@@ -59,9 +48,7 @@ const CustomForgotPass = (props) => {
                 alignItems: "center",
               }}
             >
-              <Avatar style={{ margin: 10, backgroundColor: "red" }}>
-                <LockOutlinedIcon />
-              </Avatar>
+              <img src="logo2.png" width="128" alt="logo" />
               <Typography component="h1" variant="h5">
                 Réinitialisez votre mot de passe
               </Typography>

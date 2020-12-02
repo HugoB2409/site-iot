@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     maxWidth: 64,
+    //border: "1px solid white",
   },
 }));
 
@@ -93,16 +94,6 @@ const NavigationBar = (props) => {
             <img src="lol.png" alt="logo" className={classes.logo} />
           </Link>
           <div className={classes.root} />
-
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={props.changeTheme}
-            color="inherit"
-          >
-            <Brightness4Icon fontSize="large" />
-          </IconButton>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"

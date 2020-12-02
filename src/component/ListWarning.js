@@ -117,8 +117,8 @@ const ListTemp = (props) => {
     setPage(0);
   };
 
-  const handleClick = (name) => {
-    history.push(`/user/${name}`);
+  const handleClick = (id) => {
+    history.push(`/temp/${id}`);
   };
 
   return (
@@ -147,7 +147,7 @@ const ListTemp = (props) => {
             ).map((row) => (
               <TableRow
                 hover
-                onClick={() => handleClick(row.name)}
+                onClick={() => handleClick(row.id)}
                 key={row.createdAt}
               >
                 <TableCell component="th" scope="row">

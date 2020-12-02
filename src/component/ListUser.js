@@ -126,10 +126,10 @@ const ListUser = (props) => {
               <b>Nom</b>
             </TableCell>
             <TableCell align="right">
-              <b>Date de creation</b>
+              <b>Status</b>
             </TableCell>
             <TableCell align="right">
-              <b>Status</b>
+              <b>Date de creation</b>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -151,7 +151,7 @@ const ListUser = (props) => {
                 <TableCell align="right" style={{ width: 200 }}>
                   {row.UserStatus}
                 </TableCell>
-                <TableCell align="right" style={{ width: 200 }}>
+                <TableCell align="right" style={{ width: 250 }}>
                   {row.UserCreateDate}
                 </TableCell>
               </TableRow>

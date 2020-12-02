@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { createTodo } from "../graphql/mutations";
+import { createTodo } from "../../graphql/mutations";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -16,6 +16,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+
+//TODO: Ajouter validations et message d'erreurs
+//TODO: Changer l'information dans le pop-up
+//TODO: Apres avoir creer la temperature, rediriger vers la page d'accueil
 
 const useStyles = makeStyles({
   title: {

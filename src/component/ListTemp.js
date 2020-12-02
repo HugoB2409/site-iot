@@ -150,10 +150,10 @@ const ListTemp = (props) => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell style={{ width: 200 }} align="right">
+                <TableCell style={{ width: 100 }} align="right">
                   {row.temperature}
                 </TableCell>
-                <TableCell style={{ width: 200 }} align="right">
+                <TableCell style={{ width: 250 }} align="right">
                   {row.createdAt}
                 </TableCell>
               </TableRow>

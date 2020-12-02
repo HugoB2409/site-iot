@@ -12,6 +12,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
 import { debounce } from "lodash";
 
+//TODO: Ajouter la subscription qui regarde si la temp est au dessus de 38 et l'ajoute a la liste
+//TODO: Faire marcher le filtre ou le retirer
+//TODO: Faire la notif sur l'icone dans la barre de notif lorsqu'une nouvelle temperature suspectes est enregistrer
+
 const useStyles = makeStyles((theme) => ({
   table: {
     marginTop: 10,

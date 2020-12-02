@@ -14,7 +14,7 @@ const Copyright = () => {
       align="center"
     >
       {"Copyright © "}
-      <Link to="/">TempReader</Link> {new Date().getFullYear()}
+      <a href="/">SmarterTemp</a> {new Date().getFullYear()}
       {"."}
     </Typography>
   );

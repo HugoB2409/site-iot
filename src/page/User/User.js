@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ListUser from "../component/ListUser";
+import ListUser from "../../component/ListUser";
 import Typography from "@material-ui/core/Typography";
 import { API, Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
@@ -11,6 +11,10 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import Divider from "@material-ui/core/Divider";
+
+//TODO: Reformatter la date de creation
+//TODO: Regarder quel info serait pertinant a afficher dans la liste
+//TODO: Faire marcher le filtre ou le retirer
 
 const useStyles = makeStyles((theme) => ({
   table: {

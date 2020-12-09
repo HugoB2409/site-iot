@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Authenticator, ForgotPassword, SignOut } from "aws-amplify-react";
+import {
+  Authenticator,
+  ForgotPassword,
+  SignOut,
+  Greetings,
+} from "aws-amplify-react";
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { SignIn } from "aws-amplify-react";
 import config from "./aws-exports";
 import CustomSignIn from "./page/Authentification/CustomSignIn";
@@ -23,7 +29,7 @@ const AppWithAuth = () => {
   return (
     <ThemeProvider theme={theme}>
       <Authenticator
-        hide={[SignIn, ForgotPassword, SignOut]}
+        hide={[SignIn, ForgotPassword, SignOut, Greetings]}
         amplifyConfig={config}
       >
         <CustomSignIn />

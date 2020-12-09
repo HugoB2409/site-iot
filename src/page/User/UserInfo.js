@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { API, Auth } from "aws-amplify";
-import { listTodos } from "../../graphql/queries";
+import { listTemperatures } from "../../graphql/queries";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -101,10 +101,10 @@ const UserInfo = (props) => {
   const fetchTemps = async () => {
     try {
       const tempData = await API.graphql({
-        query: listTodos,
+        query: listTemperatures,
         variables: { filter: filter },
       });
-      const temperatures = tempData.data.listTodos.items;
+      const temperatures = tempData.data.listTemperatures.items;
       console.log(temperatures);
       setTemps(temperatures);
     } catch (err) {

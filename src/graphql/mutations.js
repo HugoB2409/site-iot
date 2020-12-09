@@ -1,51 +1,51 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createTemperature = /* GraphQL */ `
+  mutation CreateTemperature(
+    $input: CreateTemperatureInput!
+    $condition: ModelTemperatureConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createTemperature(input: $input, condition: $condition) {
       id
+      type
       sub
       name
       temperature
-      date
       url
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateTemperature = /* GraphQL */ `
+  mutation UpdateTemperature(
+    $input: UpdateTemperatureInput!
+    $condition: ModelTemperatureConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateTemperature(input: $input, condition: $condition) {
       id
+      type
       sub
       name
       temperature
-      date
       url
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteTemperature = /* GraphQL */ `
+  mutation DeleteTemperature(
+    $input: DeleteTemperatureInput!
+    $condition: ModelTemperatureConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteTemperature(input: $input, condition: $condition) {
       id
+      type
       sub
       name
       temperature
-      date
       url
       createdAt
       updatedAt

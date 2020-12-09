@@ -52,7 +52,7 @@
             "ENV": {
               "Ref": "env"
             },
-            "GROUP": "Admin",
+            "GROUP": "admin",
             "USERPOOL": {
               "Ref": "authsiteiotb6397cdfUserPoolId"
             }
@@ -67,8 +67,8 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-siteiot-dev-81006-deployment",
-          "S3Key": "amplify-builds/AdminQueries2a80aa58-646b756555516549616d-build.zip"
+          "S3Bucket": "amplify-siteiot-prod-152305-deployment",
+          "S3Key": "amplify-builds/AdminQueries2a80aa58-71496376734e5257312b-build.zip"
         }
       }
     },

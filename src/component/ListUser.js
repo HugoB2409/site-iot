@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,6 +16,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import Skeleton from "@material-ui/lab/Skeleton";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
+import Moment from 'react-moment';
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -97,6 +98,7 @@ const ListUser = (props) => {
   let history = useHistory();
   const classes = useStyles();
   const rows = props.data;
+  console.log(rows)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -152,7 +154,7 @@ const ListUser = (props) => {
                   {row.UserStatus}
                 </TableCell>
                 <TableCell align="right" style={{ width: 250 }}>
-                  {row.UserCreateDate}
+                  <Moment format="YYYY/MM/DD hh:mm:ss" date={row.UserCreateDate} />
                 </TableCell>
               </TableRow>
             ))}

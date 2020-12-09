@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
 
 //TODO: le margin bottom devrait seuleument etre sur mobile
 

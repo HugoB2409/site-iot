@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     paddingBottom: "4rem",
-    marginTop: 48,
+    marginTop: 96,
   },
   footer: {
     position: "absolute",

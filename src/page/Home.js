@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { API, graphqlOperation } from "aws-amplify";
-import { listTodos } from "../graphql/queries";
+import { getTemperatureByCreatedAt } from "../graphql/queries";
 import ListTemp from "../component/ListTemp";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
@@ -81,12 +81,12 @@ const Accueil = () => {
   useEffect(() => {
     fetchTodos();
     const subscription = API.graphql(
-      graphqlOperation(subscriptions.onCreateTodo)
+      graphqlOperation(subscriptions.onCreateTemperature)
     ).subscribe({
       next: (tempData) => {
-        console.log(tempData.value.data.onCreateTodo);
-        if (tempData.value.data.onCreateTodo != null) {
-          setTemps((temps) => [tempData.value.data.onCreateTodo, ...temps]);
+        console.log(tempData.value.data.onCreateTemperature);
+        if (tempData.value.data.onCreateTemperature != null) {
+          setTemps((temps) => [tempData.value.data.onCreateTemperature, ...temps]);
         }
       },
     });
@@ -94,8 +94,10 @@ const Accueil = () => {
 
   const fetchTodos = async () => {
     try {
-      const data = await API.graphql(graphqlOperation(listTodos));
-      setTemps(data.data.listTodos.items);
+      const data = await API.graphql(
+        graphqlOperation(getTemperatureByCreatedAt, {type: 'Temperature',sortDirection: 'DESC' })
+      );
+      setTemps(data.data.getTemperatureByCreatedAt.items);
     } catch (err) {
       console.log("error fetching todos");
     }
@@ -113,7 +115,7 @@ const Accueil = () => {
   const searchTodos = async (val) => {
     try {
       const data = await API.graphql({
-        query: listTodos,
+        query: getTemperatureByCreatedAt,
         variables: {
           filter: {
             name: {
@@ -122,7 +124,7 @@ const Accueil = () => {
           },
         },
       });
-      setTemps(data.data.listTodos.items);
+      setTemps(data.data.getTemperatureByCreatedAt.items);
     } catch (err) {
       console.log("error fetching todos");
     }

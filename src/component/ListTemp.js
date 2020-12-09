@@ -16,6 +16,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Moment from 'react-moment';
 
 //TODO: Ajouter des filtre
 
@@ -154,7 +155,7 @@ const ListTemp = (props) => {
                   {row.temperature}
                 </TableCell>
                 <TableCell style={{ width: 250 }} align="right">
-                  {row.createdAt}
+                  <Moment format="YYYY/MM/DD hh:mm:ss" date={row.createdAt} />
                 </TableCell>
               </TableRow>
             ))}

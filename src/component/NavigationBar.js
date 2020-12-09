@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import PeopleIcon from "@material-ui/icons/People";
 import WarningIcon from "@material-ui/icons/Warning";
-import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Auth } from "aws-amplify";
@@ -13,9 +12,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Badge from "@material-ui/core/Badge";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     maxWidth: 64,
-    //border: "1px solid white",
   },
 }));
 
@@ -131,18 +127,17 @@ const NavigationBar = (props) => {
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: "buttom",
+              horizontal: "left",
             }}
             keepMounted
             transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: "buttom",
+              horizontal: "left",
             }}
             open={open}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClickParam}>Parametres</MenuItem>
             <MenuItem onClick={signOut}>Deconnexion</MenuItem>
           </Menu>
         </Toolbar>
@@ -153,23 +148,4 @@ const NavigationBar = (props) => {
 
 export default NavigationBar;
 
-/*
-<IconButton
-  aria-label="account of current user"
-  aria-controls="menu-appbar"
-  aria-haspopup="true"
-  onClick={handleClickUser}
-  color="inherit"
->
-  <PeopleIcon fontSize="large" />
-</IconButton>
-<IconButton
-  aria-label="account of current user"
-  aria-controls="menu-appbar"
-  aria-haspopup="true"
-  onClick={handleClickWarning}
-  color="inherit"
->
-  <WarningIcon fontSize="large" />
-</IconButton>
-*/
+// <MenuItem onClick={handleClickParam}>Parametres</MenuItem>

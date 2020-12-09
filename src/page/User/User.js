@@ -93,7 +93,9 @@ const User = () => {
       },
     };
     const data = await API.get(apiName, path, myInit);
+    //data.Users.forEach( user => user.UserCreateDate = (new Date(user.UserCreateDate)).toLocaleString );
     setUsers(data.Users);
+    console.log(data.Users)
     setFilterUsers(data.Users);
   };
 
@@ -127,11 +129,6 @@ const User = () => {
           />
         </div>
         <div className={classes.grow} />
-        <Tooltip title="Filtrer">
-          <IconButton aria-label="filter list" className={classes.iconButton}>
-            <FilterListIcon fontSize="large" />
-          </IconButton>
-        </Tooltip>
         <Link to="/newUser">
           <Tooltip title="Ajouter utilisateur">
             <IconButton color="secondary" className={classes.iconButton}>

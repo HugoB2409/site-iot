@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { createTodo } from "../../graphql/mutations";
+import { createTemperature } from "../../graphql/mutations";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -88,11 +88,12 @@ const NewTemp = () => {
         (user) => user.Attributes[0].Value === tempInfo.sub
       );
       const data = {
+        type: "Temperature",
         name: user.Username,
         temperature: tempInfo.temperature,
         sub: tempInfo.sub,
       };
-      await API.graphql(graphqlOperation(createTodo, { input: data }));
+      await API.graphql(graphqlOperation(createTemperature, { input: data }));
       setTempInfo(initialState);
     } catch (err) {
       console.log("error creating todo:", err);

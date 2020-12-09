@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { API } from "aws-amplify";
-import { listTodos } from "../graphql/queries";
+import { listTemperatures } from "../graphql/queries";
 import ListWaring from "../component/ListWarning";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
@@ -98,7 +98,7 @@ const Warning = () => {
   const searchTodos = async (val) => {
     try {
       const data = await API.graphql({
-        query: listTodos,
+        query: listTemperatures,
         variables: {
           filter: {
             name: {
@@ -110,7 +110,7 @@ const Warning = () => {
           },
         },
       });
-      setTemps(data.data.listTodos.items);
+      setTemps(data.data.listTemperatures.items);
     } catch (err) {
       console.log("error fetching todos");
     }
@@ -119,10 +119,10 @@ const Warning = () => {
   const fetchTodos = async () => {
     try {
       const data = await API.graphql({
-        query: listTodos,
+        query: listTemperatures,
         variables: { filter: filter },
       });
-      setTemps(data.data.listTodos.items);
+      setTemps(data.data.listTemperatures.items);
     } catch (err) {
       console.log("error fetching todos");
     }

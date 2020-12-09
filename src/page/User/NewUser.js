@@ -11,10 +11,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //TODO: Ajouter validations et message d'erreurs
-//TODO: ajouter pop-up de succes, erreur, etc.
-//TODO: Apres avoir creer le user, rediriger vers la page de liste des users
 
 const useStyles = makeStyles({
   button: {
@@ -33,6 +32,7 @@ const useStyles = makeStyles({
 });
 
 const NewUser = () => {
+  let history = useHistory();
   const classes = useStyles();
   const initialState = { username: "", email: "", password: "" };
   const [sub, setSub] = React.useState(0);
@@ -46,6 +46,7 @@ const NewUser = () => {
   const handleClose = () => {
     setOpen(false);
     setUserInfo(initialState);
+    history.push(`/User`);
   };
 
   const addUser = async () => {
@@ -134,6 +135,7 @@ const NewUser = () => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        fullWidth
       >
         <DialogTitle id="alert-dialog-title">
           {"Utilisateur ajouter avec succès."}
@@ -141,8 +143,9 @@ const NewUser = () => {
 
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Le id du nouveau user est : <br />
-            {sub !== 0 ? <h4>{sub}</h4> : <h4>Nothing</h4>}
+            Veulliez enregistrer la puce au nom de : <b>{userInfo.username}</b> <br /><br />
+            Si nécessaire, envoyer un email a <b>{userInfo.email}</b> avec le mot de passe temporaire <b>{userInfo.password}</b>{" "}
+            pour qu'il puisse se connecter a l'application mobile SmarterTemp.
           </DialogContentText>
         </DialogContent>
 

@@ -1,8 +1,9 @@
-type Todo @model {
+type Temperature @model @key(name: "ByCreatedAt", fields: [ "type", "createdAt" ], queryField: "getTemperatureByCreatedAt") {
   id: ID!
+  type: String!
   sub: String!
   name: String!
-  temperature: Float
-  date: AWSDateTime
+  temperature: Float!
   url: String
+  createdAt: AWSDateTime!
 }
